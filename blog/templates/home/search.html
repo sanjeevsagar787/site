@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %} Search Results {% endblock title %}
+
+{% block blogactive %} active {% endblock blogactive %}
+{% block body %}
+<div class="container my-3" style="font-family: 'Acme'">
+    <br>
+    <h2>Search results:</h2>
+    {% if allPosts|length < 1 %} <p>No search results</p>
+
+        Your search query: <b>{{query}} </b> did not match any documents. <br>
+        Suggestions:
+        <ul>
+            <li>Make sure that all words are spelled correctly.</li>
+            <li>Try different keywords.</li>
+            <li>Try more general keywords.</li>
+            <li>Try fewer keywords.</li>
+        </ul>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        {% endif %}
+        <div class="container mt-3">
+            <div class="row my-2">
+                {% for item in allPosts %}
+                <div class="col-md-6">
+                    <div
+                        class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative shadow-lg p-3 mb-5 bg-white rounded border border-dark">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-primary">World</strong>
+                            <h3 class="mb-0">{{item.tilte}}</h3>
+                            <div class="mb-1 text-muted">{{item.pub_date}}</div>
+                            <p class="card-text mb-auto">{{item.post1 | truncatechars:200}}
+                            </p>
+                            <a href="/Blogs/{{item.slug}}" class="stretched-link">Continue reading</a>
+                        </div>
+
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:2%}
+            </div>
+            <div class="row my-2">
+                {%endif%}
+                {%endfor%}</div>
+        </div>
+</div>
+{% endblock body %}
